@@ -1,0 +1,236 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<%@ Import Namespace="System.Data" %>
+<%@ Import Namespace="System.Globalization" %>
+<%@ Master Language="VB" CodeFile="MasterPage.master.vb" Inherits="MasterPage_MasterPage" %>
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <meta name="description" content="Velkoobchodní a maloobchodní prodej materiálů, vybavení a příslušenství pro modely letadel a vrtulníků. Přímý dovoz a zastoupení značek DUALSKY, Solarfilm, GWS, Hyperion, Revolectrix, HOTGEAR, Castle Creations, EagleTree System a dalších." />
+    <meta http-equiv="Content-Type" content="text/html; charset=windows-1250" />
+    <link rel="Shortcut Icon" href="http://horejsi.cz/favicon.ico" type="image/x-icon" />
+    <link href="../CSS/hlavni.css" rel="stylesheet" type="text/css" />
+    <link href="../CSS/dropdown/dropdown.vertical.css" rel="stylesheet" type="text/css" />
+    <link href="../CSS/themes/default/default.css" rel="stylesheet" type="text/css" />
+	<title>Modely Hořejší</title>
+</head>
+<body>
+<div id="obal">
+<form id="form1" runat="server">
+ <asp:ScriptManager ID="ScriptManager1" runat="server"/>
+   
+<div id="hlavicka">
+<div class="napln">
+<div class="vlevo">
+<div class="logo"><a href="http://www.horejsi.cz/"><img src="~/WebImages/horejsi-logo.png" alt="Hořejší" width="210" height="78" border="0" runat="server"/></a></div>
+</div>
+<div class="stred">
+<div class="textf">Hořejší model s.r.o., Slovanská 8, 326 00 Plzeň</div><div class="textg"><asp:Literal ID="Literal1" runat="server" Text="<%$ Resources: title%>" /></div>
+</div>
+<div class="vpravo">
+<div class="odkazy">
+<div class="language"><asp:ImageButton ID="imb_cz" runat="server" ImageUrl="~/WebImages/vlajky/cz.png" alt="Česky" />&nbsp;<asp:ImageButton ID="imb_en" runat="server" ImageUrl="~/WebImages/vlajky/eng.png" alt="English" /></div>
+  <div class="textg"><asp:Literal ID="Literal2" runat="server" Text="<%$ Resources: call%>"></asp:Literal> +420 377 429 869</div>
+</div>
+</div>
+</div>
+</div>
+
+<div id="menuhorizontal">
+<div class="napln">
+<div class="vlevo">
+<asp:SiteMapDataSource ID="SM_HorizontMenu" SiteMapProvider="normalSite" runat="server" ShowStartingNode="False" />
+    <asp:Menu ID="hlavniMenu" runat="server" Orientation="Horizontal" 
+        DataSourceID="SM_HorizontMenu"
+        DynamicEnableDefaultPopOutImage="False" 
+        StaticEnableDefaultPopOutImage="False" 
+        IncludeStyleBlock="false"
+        SkipLinkText="">
+    </asp:Menu>
+</div>
+</div>
+</div>
+
+<div id="podhlavicku">
+  <div class="napln">
+      <%--<asp:SqlDataSource ID="DS_Banner" runat="server" ConnectionString="<%$ ConnectionStrings:DataHorejsi %>"
+                    SelectCommand="SELECT Obsah,ObsahEN FROM T_Obsah WHERE (ID_mista = @ID_mista) AND (ID_Obsah = (SELECT MAX(ID_Obsah) AS Expr1 FROM T_Obsah AS T_Obsah_1 WHERE (ID_mista = @ID_mista)))">
+                    <SelectParameters>
+                        <asp:Parameter DefaultValue="4" Name="ID_mista" Type="Int32" />
+                    </SelectParameters>
+                </asp:SqlDataSource>
+                <asp:DetailsView ID="DetailsView1" runat="server" AutoGenerateRows="False" DataSourceID="DS_Banner"
+                    GridLines="None" RowStyle-Wrap="True" Width="100%">
+                    <RowStyle Wrap="True" />
+                    <Fields>
+                        <asp:BoundField DataField="<%$ Resources: dataBaner%>" HeaderText="Obsah" HtmlEncode="False" ShowHeader="False"
+                            SortExpression="Obsah" />
+                    </Fields>
+                </asp:DetailsView>--%>
+  </div>
+</div>
+<div id="obsah">
+<div class="obalobsahu">
+<div class="napln">
+<div class="vlevo">
+<div class="hledani">
+  <div class="popisek"></div>
+  <asp:TextBox ID="txb_ZadejFull" runat="server" ToolTip="<%$ Resources: findTip%>" CssClass="inputhledani" EnableViewState="True"></asp:TextBox>
+  <asp:Button ID="btn_HledejFull" runat="server" Text="<%$ Resources: find%>" CssClass="button" />
+</div>
+  <div class="menuprodukty">
+  <div class="oddelovac"><asp:Literal ID="Literal4" runat="server" Text="<%$ Resources: titleProducts%>"></asp:Literal></div>
+  <ul id="nav"  class="dropdown dropdown-vertical">
+                <asp:Repeater runat="server" ID="RPT_Kategorie">
+                <HeaderTemplate></HeaderTemplate>
+                <ItemTemplate>
+                <%If CultureInfo.CurrentCulture.ToString = "en-US" Then%>
+                <li class="dir"><%# DataBinder.Eval(Container.DataItem, "KategorieEN")%>
+                <%Else%>
+                <li class="dir"><%# DataBinder.Eval(Container.DataItem, "Kategorie")%>
+                <%End If%>
+                <ul class="subdir">
+                <asp:Repeater runat="server" ID="RPT_Subkategorie" datasource='<%#DirectCast(Container.DataItem, DataRowView).Row.GetChildRows("myrelation") %>'>
+                <ItemTemplate>
+                    <%If CultureInfo.CurrentCulture.ToString = "en-US" Then%>
+                    <li id="sub"><a href="<%# DirectCast(Container.DataItem, DataRow)("WebURL")%>"><%# DirectCast(Container.DataItem, DataRow)("SubkategorieEN")%></a></li>
+                    <%Else%>
+                    <li id="sub"><a href="<%# DirectCast(Container.DataItem, DataRow)("WebURL")%>"><%# DirectCast(Container.DataItem, DataRow)("Subkategorie")%></a></li>
+                    <%End If%>
+                </ItemTemplate>
+                </asp:Repeater>
+                </ul>
+                </li>
+                </ItemTemplate>
+                </asp:Repeater>
+                </ul>
+</div>
+
+
+<div class="oddelovac"></div>
+<div class="leveinfo"><asp:Literal ID="Literal3" runat="server" Text="<%$ Resources: info%>"></asp:Literal></div>
+</div>
+<div class="centr">
+
+<%--SlideShow--%>
+    <%If InStr(LCase(Hlavni.Page.AppRelativeVirtualPath), "default.aspx") Then%>
+    
+
+    <asp:UpdatePanel ID="up1" runat="server">
+        
+        <ContentTemplate>
+            
+            <asp:Timer ID="Timer1" runat="server" 
+                     Interval="5000">
+                </asp:Timer>
+            <asp:HyperLink ID="SlideShowLink" runat="server" >
+                <asp:Image runat="server" ID="imgSlideShow" />
+                </asp:HyperLink>
+        </ContentTemplate>
+    </asp:UpdatePanel> 
+<%--<asp:ImageButton ID="ImgB_Stop" ToolTip="Stop slideShow" runat="server" />
+<asp:ImageButton ID="ImgB_Start" ToolTip="Start slideShow" runat="server" />--%>
+
+    <%End If%>
+<!-- \\\ MAIN /// -->
+<asp:ContentPlaceHolder ID="Hlavni" runat="server">
+
+</asp:ContentPlaceHolder>
+<!-- /// MAIN \\\ -->
+</div>
+<div class="vpravo">
+<div class="specifikace"> <asp:Literal ID="Literal5" runat="server" Text="<%$ Resources: titleCart%>"></asp:Literal></div>
+<div class="kosik">
+<div class="ikonakosik"><asp:ImageButton ID="IMB_Kosik" PostBackUrl="~/Pages/Kosik.aspx" ImageUrl="../WebImages/kosik2.png" AlternateText="Košík"   runat="server" /></div>
+<a href="#"></a><asp:Literal ID="Literal6" runat="server" Text="<%$ Resources: itemsCart%>"></asp:Literal> <strong><asp:Label ID="lbl_pocetPolozek" runat="server" Text="0"></asp:Label></strong><br />
+<asp:Literal ID="Literal7" runat="server" Text="<%$ Resources: titlePrice%>"></asp:Literal> <strong>
+    <asp:Label ID="lbl_cenaNakupu" runat="server" Text="0"></asp:Label> Kč</strong></div>
+    
+
+<div class="napln4">
+<div class="prihlaseni">
+<div class="popis"><asp:Literal ID="Literal8" runat="server" Text="<%$ Resources: titleLogin%>"></asp:Literal></div>
+<asp:Panel ID="Panel1" runat="server" DefaultButton="btn_prihlasit">
+<div class="jmeno"><asp:TextBox ID="txb_uzivatel" CssClass="authInputjmeno" ToolTip="<%$ Resources: user%>" Text="" runat="server" ></asp:TextBox>
+    <asp:TextBoxWatermarkExtender ID="TextBoxWatermarkExtender1" runat="server" WatermarkCssClass="watertext" TargetControlID="txb_uzivatel" WatermarkText="<%$ Resources: user%>">
+    </asp:TextBoxWatermarkExtender>
+<asp:Label ID="lbl_statusPrihlaseni" runat="server" CssClass="prihlasen" Text=""></asp:Label>
+</div>
+<div class="heslo"><asp:TextBox ID="txb_heslo" CssClass="authInputheslo" ToolTip="<%$ Resources: password%>" runat="server" TextMode="Password"></asp:TextBox>
+<asp:Button ID="btn_prihlasit" CssClass="button" runat="server" Text="<%$ Resources: buttonLogin%>" />
+<asp:Button ID="btn_odhlasit" CssClass="button" runat="server" Text="<%$ Resources: buttonLogout%>" /></div>
+</asp:Panel>
+<div class="odkazy">
+<asp:LinkButton ID="lnb_registrace" runat="server" PostBackUrl="../Pages/Registrace.aspx" Text="<%$ Resources: registration%>" AlternateText="<%$ Resources: registration%>"></asp:LinkButton>
+<asp:LinkButton ID="lnb_zapomenuteHeslo" runat="server" Text="<%$ Resources: forgotpass%>" PostBackUrl="../Pages/ZapHeslo.aspx"></asp:LinkButton>
+ <asp:LinkButton ID="lnb_zmena" runat="server" Text="<%$ Resources: change%>" PostBackUrl="../Pages/Registrace.aspx?update=1"></asp:LinkButton></div>
+</div>
+</div>
+                        <asp:Panel runat="server" ID="popUp_alert">
+                            <div class="popup_Container">
+                <div class="popup_Titlebar" id="PopupHeader">
+                    <asp:Label ID="lbl_title" runat="server" Text="Label"></asp:Label></div>
+                <div class="popup_Body">
+                    <asp:Label ID="lbl_message" runat="server" Text=""></asp:Label>
+                </div>
+                <div class="popup_Buttons">
+                    <asp:Button ID="btn_OK" Width="55px" CssClass="button" runat="server" Text="OK" />
+		</div>
+        </div>
+                        </asp:Panel>
+    
+                        <asp:HiddenField ID="x" runat="server" />
+
+                        <asp:ModalPopupExtender ID="MPE_Alert" runat="server" 
+                            DynamicServicePath="" Enabled="True" TargetControlID="x"  
+                            PopupControlID="popUp_alert"
+                            backgroundcssclass="ModalPopupBG"
+                            CancelControlID="btn_OK">
+                        <Animations>
+                    <OnHiding>
+                        <Sequence>                            
+                            <Parallel>
+                                <FadeOut Duration=".5" Fps="20" />
+                            </Parallel>
+                        </Sequence>
+                    </OnHiding>            
+            </Animations>
+                        </asp:ModalPopupExtender>
+
+    
+
+<%--<div class="specifikace">Podporujeme:</div>
+<div class="boxpodpora"><img src="~/WebImages/podpora-logo.png" /> <img src="~/WebImages/podpora-logo.png" /></div>
+<div class="specifikace">Partneři:</div>
+<div class="boxpodpora"><img src="~/WebImages/parneri.png" width="158" height="244" /></div>--%>
+<asp:SqlDataSource ID="DS_DataObsah" runat="server" ConnectionString="<%$ ConnectionStrings:DataHorejsi %>"
+                                SelectCommand="SELECT Obsah,ObsahEN FROM T_Obsah_ND WHERE (ID_mista = @ID_mista) AND (ID_Obsah = (SELECT MAX(ID_Obsah) AS Expr1 FROM T_Obsah_ND AS T_Obsah_1 WHERE (ID_mista = @ID_mista)))">
+                                <SelectParameters>
+                                    <asp:Parameter DefaultValue="2" Name="ID_mista" Type="Int32" />
+                                </SelectParameters>
+                            </asp:SqlDataSource>
+                            <asp:DetailsView ID="DV_ObsahPravehoSloupku" runat="server" AutoGenerateRows="False"
+                                DataSourceID="DS_DataObsah" GridLines="None" RowStyle-Wrap="True" Width="100%"
+                                CellPadding="0">
+                                <RowStyle Wrap="True" />
+                                <Fields>
+                                    <asp:BoundField DataField="<%$ Resources: fieldAkce %>" HeaderText="Obsah" HtmlEncode="False" ShowHeader="False"
+                                        SortExpression="Obsah" />
+                                </Fields>
+                            </asp:DetailsView>
+</div>
+</div>
+</div></div>
+<div id="paticka">
+<div class="napln">
+<div class="vlevo"><div class="tx1"><img src="~/WebImages/horejsi-min.png" alt="Horejsi" width="149" height="29" runat="server"/></div> 
+<div class="tx2">Copyright © 2010 Hořejší s.r.o.</div></div>
+<div class="vpravo">
+<div class="tx1">design by</div> <div class="tx2"><a href="http://www.abcool.cz/" title="Internetové obchody"><img src="~/WebImages/tvorba-internetovych-stranek-abcool.png" alt="Tvorba internetových obchodů a www stránek - Abcool" width="110" height="29" border="0" runat="server" /></a></div>
+<div class="tx3"><img src="~/WebImages/xhtml_icon.gif" runat="server" alt="Valid XHTML 1.0 Transitional" /> <img src="~/WebImages/css_icon.gif" alt="Valid CSS" runat="server"/></div></div>
+  </div></div>
+  </form></div>
+</body>
+</html>
+
