@@ -1,0 +1,17 @@
+<?xml version="1.0" standalone="yes"?>
+<SHOP>
+  <SHOPITEM>
+    <PRODUCT_CODE>0026-01</PRODUCT_CODE>
+    <PARENT_ID>14</PARENT_ID>
+    <CHILD_ID>177</CHILD_ID>
+    <PRODUCT>Guma TAN SUPER SPORT 1x3,2 mm (500 g)</PRODUCT>
+    <PRODUCER_ID>50</PRODUCER_ID>
+    <DESCRIPTION_FULL>&lt;p&gt;Kvalitn&amp;#237; guma TAN SUPER SPORT (USA) o průřezu 1 x 3.2 mm pro pohon modelů s gumov&amp;#253;m svazkem, v&amp;#253;hradně použ&amp;#237;van&amp;#225; &amp;#353;pičkov&amp;#253;mi&amp;nbsp;model&amp;#225;ři na vrcholn&amp;#253;ch světov&amp;#253;ch soutěž&amp;#237;ch. &lt;br /&gt;Balen&amp;#237;&amp;nbsp;500 g obsahuje&amp;nbsp;cca 150m p&amp;#225;sku.&lt;span style="line-height: normal; font-style: normal; font-family: Verdana, Arial, Helvetica, sans-serif; color: #000000; font-size: x-small; font-weight: normal"&gt;&amp;nbsp; &lt;/span&gt;&lt;/p&gt;</DESCRIPTION_FULL>
+    <PRICE>655.70</PRICE>
+    <PRICE_MC>793.40</PRICE_MC>
+    <MARGIN>25</MARGIN>
+    <VAT>21</VAT>
+    <AVAILABILITY>45</AVAILABILITY>
+    <IMGURL>http://www.horejsi.cz/Images/0026-01.jpg</IMGURL>
+  </SHOPITEM>
+</SHOP>

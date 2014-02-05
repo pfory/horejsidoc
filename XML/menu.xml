@@ -1,0 +1,11 @@
+<?xml version="1.0" standalone="yes"?>
+<MENU>
+  <parent>
+    <ID>1</ID>
+    <TEXT>rádiové řízení</TEXT>
+    <child>
+      <ID>1</ID>
+      <TEXT>simulátory</TEXT>
+    </child>
+  </parent>
+</MENU>
