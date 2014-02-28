@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<siteMap xmlns="http://schemas.microsoft.com/AspNet/SiteMap-File-1.0" enableLocalization="true" >
+    <!-- Odkazy 1236 -->
+    <siteMapNode>
+      <siteMapNode url="~/Default.aspx"  title="$resources: HMenu, item1" roles="*">
+      </siteMapNode>
+      <siteMapNode url="~/Pages/Kontakt.aspx" title="$resources: HMenu, item2" roles="*">
+      </siteMapNode>
+      <siteMapNode url="~/Pages/ListZpravodaj.aspx"  title="$resources: HMenu, item3" roles="*">
+      </siteMapNode>
+      <siteMapNode url="~/Pages/Prodejci.aspx" title="$resources: HMenu, item4" roles="*">
+      </siteMapNode>
+      <siteMapNode url="~/Pages/ListClanky.aspx"  title="$resources: HMenu, item5" roles="*">
+      </siteMapNode>
+      <!--<siteMapNode url="~/Pages/ListProdukt.aspx?kategorie=0&amp;subkategorie=0&amp;fraze=&amp;akce=1"  title="$resources: HMenu, item6" roles="*">
+      </siteMapNode>-->
+        <siteMapNode url="~/Pages/KeStazeni.aspx"  title="$resources: HMenu, item8" roles="*">
+        </siteMapNode>
+      <siteMapNode url="~/Pages/ObchPodminky.aspx"  title="$resources: HMenu, item7" roles="*">
+      </siteMapNode>
+    </siteMapNode>    
+ 
+</siteMap>
