@@ -1,0 +1,7 @@
+select ID_objcislo, kat.Text_CZ, sub.Text_CZ, sub.ID_subkategorie, p.Text_CZ, replace(p.MC,'.',','), replace(p.VC,'.',','), p.dph, 
+replace(p.MC*(100+DPH)/100,'.',','), replace(p.VC*(100+DPH)/100,'.',',')
+from dbo.T_Produkt p
+join dbo.T_Kategorie kat on kat.ID_kategorie=p.ID_kategorie
+join dbo.T_Subkategorie sub on sub.ID_subkategorie=p.ID_subkategorie
+--where ID_objcislo='2369'
+order by 2,3
